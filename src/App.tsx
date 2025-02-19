@@ -12,13 +12,11 @@ const App: React.FC = () => {
 
 	const handleAddOrUpdateContact = (contact: Omit<Contact, 'id'>) => {
 		if (editingContact) {
-			// Editar contacto existente
 			setContacts((prev) =>
 				prev.map((c) => (c.id === editingContact.id ? { ...c, ...contact } : c))
 			);
 			setEditingContact(null);
 		} else {
-			// Añadir nuevo contacto
 			setContacts((prev) => [...prev, { ...contact, id: generateId() }]);
 		}
 	};
@@ -32,21 +30,31 @@ const App: React.FC = () => {
 	);
 
 	return (
-		<div className="min-h-screen bg-gray-100 p-6">
-			<div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-				<h1 className="text-3xl font-bold text-center mb-6">
-					Agenda de Contactos
-				</h1>
-				<ContactForm
-					onSubmit={handleAddOrUpdateContact}
-					initialData={editingContact || undefined}
-				/>
-				<SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
-				<ContactOptions
-					contacts={filteredContacts}
-					onEdit={setEditingContact}
-					onDelete={handleDeleteContact}
-				/>
+		<div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 p-6">
+			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+				
+				<div className="bg-white p-6 rounded-xl shadow-lg">
+					<h2 className="text-2xl font-bold text-gray-800 mb-6">
+						{editingContact ? 'Editar Contacto' : 'Añadir Contacto'}
+					</h2>
+					<ContactForm
+						onSubmit={handleAddOrUpdateContact}
+						initialData={editingContact || undefined}
+					/>
+				</div>
+
+				
+				<div className="bg-white p-6 rounded-xl shadow-lg">
+					<h2 className="text-2xl font-bold text-gray-800 mb-6">
+						Lista de Contactos
+					</h2>
+					<SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
+					<ContactOptions
+						contacts={filteredContacts}
+						onEdit={setEditingContact}
+						onDelete={handleDeleteContact}
+					/>
+				</div>
 			</div>
 		</div>
 	);

@@ -13,14 +13,18 @@ const ContactOptions: React.FC<ContactListProps> = ({
 	onDelete,
 }) => {
 	return (
-		<div className="space-y-4">
+		<div className="space-y-4 mt-6">
 			{contacts.map((contact) => (
-				<div key={contact.id} className="p-4 border rounded-lg shadow-sm">
+				<div
+					key={contact.id}
+					className="p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
 					<div className="flex justify-between items-center">
 						<div>
-							<h3 className="text-lg font-semibold">{contact.nombre}</h3>
-							<p>{contact.telefono}</p>
-							<p>{contact.email}</p>
+							<h3 className="text-lg font-semibold text-gray-800">
+								{contact.nombre}
+							</h3>
+							<p className="text-sm text-gray-600">{contact.telefono}</p>
+							<p className="text-sm text-gray-600">{contact.email}</p>
 						</div>
 						<div className="space-x-2">
 							<button
